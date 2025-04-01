@@ -2,15 +2,15 @@ package com.example.roomescapebe.config
 
 import com.querydsl.jpa.impl.JPAQueryFactory
 import jakarta.persistence.EntityManager
+import jakarta.persistence.PersistenceContext
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 
 @Configuration
 class QuerydslConfig(
-    val entityManager: EntityManager
+    @PersistenceContext
+    private val entityManager: EntityManager
 ) {
     @Bean
-    fun queryFactory(): JPAQueryFactory {
-        return JPAQueryFactory(entityManager)
-    }
+    fun queryFactory(): JPAQueryFactory = JPAQueryFactory(entityManager)
 }
