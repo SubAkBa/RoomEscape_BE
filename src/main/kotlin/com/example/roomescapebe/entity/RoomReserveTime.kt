@@ -11,16 +11,16 @@ import java.time.LocalTime
 @Entity
 @Table(name = "room_reserve_time")
 class RoomReserveTime(
-    val reserveTime: LocalTime
-) {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val roomReserveTimeId: Int? = null
+    val roomReserveTimeId: Int? = null,
+
+    val reserveTime: LocalTime,
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "room_id")
-    val room: Room = Room()
-
-    constructor() : this(LocalTime.now())
-    constructor(roomReserveTimeDto: RoomReserveTimeDto) : this(roomReserveTimeDto.reserveTime)
+    val room: Room? = null
+) {
+    constructor() : this(reserveTime = LocalTime.now(), room = Room())
+    constructor(roomReserveTimeDto: RoomReserveTimeDto, room: Room) : this(reserveTime = roomReserveTimeDto.reserveTime, room = room)
 }
