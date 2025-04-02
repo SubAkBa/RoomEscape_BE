@@ -15,4 +15,9 @@ class CustomRoomRepositoryImpl (
             .where(room.roomId.eq(roomId))
             .fetchOne()
     }
+
+    override fun findAllRoomList(): List<Room> {
+        return queryFactory.selectFrom(room)
+            .fetch()
+    }
 }
