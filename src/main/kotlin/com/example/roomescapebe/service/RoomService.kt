@@ -6,14 +6,28 @@ import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
 @Service
+@Transactional(readOnly = true)
 class RoomService(
     private val roomRepository: RoomRepository
 ) {
     @Transactional
     fun createRoom(room: Room) = roomRepository.save(room)
 
-    @Transactional(readOnly = true)
     fun getRoomByRoomId(roomId: Int): Room {
         return roomRepository.findRoomByRoomId(roomId) ?: Room()
     }
+
+    fun getAllRoomList(): List<Room> {
+        return roomRepository.findAllRoomList()
+    }
+
+    @Transactional
+    fun modifyRoom(roomId: Int, room: Room) {
+        room.roomId = roomId
+
+        roomRepository.save(room)
+    }
+
+    @Transactional
+    fun removeRoom(roomId: Int) = roomRepository.deleteById(roomId)
 }
