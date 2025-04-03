@@ -19,16 +19,14 @@ class RoomController(
 ) {
     @PostMapping
     fun createRoom(@RequestBody roomDto: RoomDto) {
-        roomService.createRoom(Room(roomDto))
+        roomService.createRoom(roomDto)
     }
 
     @GetMapping
-    fun getAllRoomList() = roomService.getAllRoomList()
+    fun getAllRoomList(): List<RoomDto> = roomService.getAllRoomList()
 
     @GetMapping("/{roomId}")
-    fun getRoomByRoomId(@PathVariable roomId: Int): Room {
-        return roomService.getRoomByRoomId(roomId)
-    }
+    fun getRoomByRoomId(@PathVariable roomId: Int): RoomDto = roomService.getRoomByRoomId(roomId)
 
     @PatchMapping("/{roomId}")
     fun modifyRoom(@PathVariable roomId: Int, @RequestBody roomDto: RoomDto) {
