@@ -20,6 +20,9 @@ class Room(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var roomId: Int? = null
 
+    @OneToMany(mappedBy = "room")
+    val roomReserveTimeList: List<RoomReserveTime> = listOf()
+
     constructor() : this("", "", "", 0, 0)
     constructor(roomDto: RoomDto) : this(roomDto.name, roomDto.description, roomDto.category, roomDto.horrorLevel, roomDto.difficultLevel)
 }
